@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Group Timetable</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .btn-group {
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px 18px;
+      margin-right: 10px;
+      border: none;
+      background: #e0e0e0;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button.active {
+      background: #4CAF50;
+      color: white;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background: #f5f5f5;
+    }
+
+    .day-cell {
+      background: #fafafa;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    /* Class type colors */
+    .lecture { background: #cce5ff; }
+    .lab { background: #fff3cd; }
+    .tutorial { background: #d4edda; }
+
+    /* 🔥 Day separator */
+    .day-separator td {
+      border-top: 4px solid #333;
+    }
+  </style>
+</head>
+<body>
+
+<h2>ME2 SEM-2 2025-26</h2>
+
+<div class="btn-group">
+  <button id="btn28" onclick="showTimetable(28)">Group 28</button>
+  <button id="btn29" onclick="showTimetable(29)">Group 29</button>
+  <button id="btn30" onclick="showTimetable(30)">Group 30</button>
+</div>
+
+<div id="timetable"></div>
+
+<script>
+  const timetableData = {
+    28: {
+      Monday: [
+        { time: "8:00 - 9:00", class: "MEL1002", type: "lecture" },
+        { time: "4:00 - 5:30", class: "COL1000", type: "lecture" }
+      ],
+      Tuesday: [
+        { time: "8:00 - 9:00", class: "CML1001", type: "lecture" },
+        { time: "9:00 - 11:00", class: "C0L1000", type: "lab" },
+        { time: "11:00 - 12:00", class: "CML1001", type: "tutorial" },
+        { time: "3:00 - 4:00", class: "MEL1002", type: "tutorial" },
+        { time: "4:00 - 5:00", class: "MTL1002", type: "lecture" }
+      ],
+      Wednesday: [
+        { time: "8:00 - 9:00", class: "CML1001", type: "lecture" },
+        { time: "9:00 - 10:00", class: "MEL1002", type: "lecture" },
+        { time: "4:00 - 5:00", class: "MTL1002", type: "lecture" }
+      ],
+      Thursday: [
+        { time: "9:00 - 1:00", class: "CMP1000", type: "lab" },
+        { time: "4:00 - 5:30", class: "COL1000", type: "lecture" }
+      ],
+      Friday: [
+        { time: "8:00 - 9:00", class: "MEL1002", type: "lecture" },
+        { time: "1:00 - 2:00", class: "MTL1002", type: "tutorial" },
+        { time: "4:00 - 5:30", class: "MTL1000", type: "lecture" }
+      ]
+    },
+    29: {
+      Monday: [
+        { time: "8:00 - 9:00", class: "MEL1002", type: "lecture" },
+        { time: "4:00 - 5:30", class: "COL1000", type: "lecture" }
+      ],
+      Tuesday: [
+        { time: "8:00 - 9:00", class: "CML1001", type: "lecture" },
+        { time: "9:00 - 11:00", class: "C0L1000", type: "lab" },
+        { time: "3:00 - 4:00", class: "MEL1002", type: "tutorial" },
+        { time: "4:00 - 5:00", class: "MTL1002", type: "lecture" }
+      ],
+      Wednesday: [
+        { time: "8:00 - 9:00", class: "CML1001", type: "lecture" },
+        { time: "9:00 - 10:00", class: "MEL1002", type: "lecture" },
+        { time: "4:00 - 5:00", class: "MTL1002", type: "lecture" }
+      ],
+      Thursday: [
+        { time: "11:00 - 1:00", class: "CML1001", type: "tutorial" },
+        { time: "1:00 - 2:00", class: "MTL1002", type: "tutorial" },
+        { time: "4:00 - 5:30", class: "COL1000", type: "lecture" }
+        
+      ],
+      Friday: [
+        { time: "8:00 - 9:00", class: "MEL1002", type: "lecture" },
+        { time: "9:00 - 1:00", class: "CMP100", type: "lab" },
+        { time: "4:00 - 5:30", class: "MTL1000", type: "lecture" }
+      ]
+    },
+    30: {
+      Monday: [
+        { time: "8:00 - 9:00", class: "MEL1002", type: "lecture" },
+        { time: "4:00 - 5:30", class: "COL1000", type: "lecture" }
+      ],
+      Tuesday: [
+        { time: "8:00 - 9:00", class: "CML1001", type: "lecture" },
+        { time: "11:00 - 1:00", class: "C0L1000", type: "lab" },
+        { time: "3:00 - 4:00", class: "MEL1002", type: "tutorial" },
+        { time: "4:00 - 5:00", class: "MTL1002", type: "lecture" }
+      ],
+      Wednesday: [
+        { time: "8:00 - 9:00", class: "CML1001", type: "lecture" },
+        { time: "9:00 - 10:00", class: "MEL1002", type: "lecture" },
+        { time: "4:00 - 5:00", class: "MTL1002", type: "lecture" }
+      ],
+      Thursday: [
+        { time: "11:00 - 1:00", class: "CML1001", type: "tutorial" },
+        { time: "1:00 - 2:00", class: "MTL1002", type: "tutorial" },
+        { time: "4:00 - 5:30", class: "COL1000", type: "lecture" }
+        
+      ],
+      Friday: [
+        { time: "8:00 - 9:00", class: "MEL1002", type: "lecture" },
+        { time: "9:00 - 1:00", class: "CMP100", type: "lab" },
+        { time: "4:00 - 5:30", class: "MTL1000", type: "lecture" }
+      ]
+    }
+  };
+
+  function showTimetable(group) {
+    document.querySelectorAll("button").forEach(b => b.classList.remove("active"));
+    document.getElementById("btn" + group).classList.add("active");
+
+    const days = Object.keys(timetableData[group]);
+    let html = `
+      <table>
+        <tr>
+          <th>Day</th>
+          <th>Time</th>
+          <th>Class</th>
+        </tr>
+    `;
+
+    days.forEach((day, dayIndex) => {
+      const sessions = timetableData[group][day];
+
+      sessions.forEach((session, index) => {
+        const separator = index === 0 && dayIndex !== 0 ? "day-separator" : "";
+
+        html += `
+          <tr class="${separator}">
+            ${index === 0 ? `<td rowspan="${sessions.length}" class="day-cell">${day}</td>` : ""}
+            <td>${session.time}</td>
+            <td class="${session.type}">${session.class}</td>
+          </tr>
+        `;
+      });
+    });
+
+    html += "</table>";
+    document.getElementById("timetable").innerHTML = html;
+  }
+
+  showTimetable(28);
+</script>
+
+</body>
+</html>
