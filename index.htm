@@ -48,6 +48,11 @@
       font-weight: bold;
       text-align: left;
     }
+    .download-btn {
+      background: #e53935;   /* red */
+      color: white;
+    }
+
 
     /* Class type colors */
     .lecture { background: #cce5ff; }
@@ -59,6 +64,8 @@
       border-top: 4px solid #333;
     }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
 </head>
 <body>
 
@@ -68,11 +75,13 @@
   <button id="btn28" onclick="showTimetable(28)">Group 28</button>
   <button id="btn29" onclick="showTimetable(29)">Group 29</button>
   <button id="btn30" onclick="showTimetable(30)">Group 30</button>
+  <button class="download-btn" onclick="downloadTimetable()">⬇ Download</button>
 </div>
 
 <div id="timetable"></div>
 
 <script>
+  let currentGroup = 28; // default
   const timetableData = {
     28: {
       Monday: [
@@ -161,8 +170,20 @@
       ]
     }
   };
+  function downloadTimetable() {
+  const table = document.getElementById("timetable");
+
+  html2canvas(table, { scale: 2 }).then(canvas => {
+    const link = document.createElement("a");
+    link.download = `Group_${currentGroup}_Timetable.png`;
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+  });
+  }
+
 
   function showTimetable(group) {
+    currentGroup = group;
     document.querySelectorAll("button").forEach(b => b.classList.remove("active"));
     document.getElementById("btn" + group).classList.add("active");
 
@@ -201,5 +222,6 @@
 
 </body>
 </html>
+
 
 
