@@ -53,6 +53,33 @@
       color: white;
     }
 
+    .abb{
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .abb div{
+      padding: 10px 18px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      border: none;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+
+    #lec{
+      color:blue;
+      background:#cce5ff;
+    }
+    #tut{
+      color:green;
+      background:#d4edda;
+    }
+    #labe{
+      color:rgb(137, 94, 3);
+      background:#fff3cd;
+    }
+
 
     /* Class type colors */
     .lecture { background: #cce5ff; }
@@ -76,6 +103,12 @@
   <button id="btn29" onclick="showTimetable(29)">Group 29</button>
   <button id="btn30" onclick="showTimetable(30)">Group 30</button>
   <button class="download-btn" onclick="downloadTimetable()">Download</button>
+</div>
+
+<div class="abb">
+  <div id="lec">Lecture</div>
+  <div id="tut">Tutorial</div>
+  <div id="labe">Lab</div>
 </div>
 
 <div id="timetable"></div>
@@ -143,30 +176,30 @@
     30: {
       Monday: [
         { time: "8:00 - 9:00", class: "MEL1002", type: "lecture" ,room:"LH 602"},
-        { time: "4:00 - 5:30", class: "COL1000", type: "lecture" }
+        { time: "9:00 - 11:00", class: "C0L1000", type: "lab",room:"LH 503" },
+        { time: "4:00 - 5:30", class: "COL1000", type: "lecture",room:"LH 111,416,418" }
       ],
       Tuesday: [
-        { time: "8:00 - 9:00", class: "CML1001", type: "lecture" },
-        { time: "11:00 - 1:00", class: "C0L1000", type: "lab",room:"LH 503" },
-        { time: "3:00 - 4:00", class: "MEL1002", type: "tutorial" },
+        { time: "8:00 - 9:00", class: "CML1001", type: "lecture",room:"LH 418" },
+        { time: "3:00 - 4:00", class: "MEL1002", type: "tutorial",room:"LH 615" },
         { time: "4:00 - 5:00", class: "MTL1002", type: "lecture",room:"LH 510" }
       ],
       Wednesday: [
-        { time: "8:00 - 9:00", class: "CML1001", type: "lecture"},
+        { time: "8:00 - 9:00", class: "CML1001", type: "lecture",room:"LH 418"},
         { time: "9:00 - 10:00", class: "MEL1002", type: "lecture",room:"LH 602" },
         { time: "11:00 - 1:00", class: "Language", type: "lab" },
         { time: "4:00 - 5:00", class: "MTL1002", type: "lecture",room:"LH 510" }
       ],
       Thursday: [
-        { time: "11:00 - 1:00", class: "CML1001", type: "tutorial" },
-        { time: "1:00 - 2:00", class: "MTL1002", type: "tutorial" },
-        { time: "4:00 - 5:30", class: "COL1000", type: "lecture" }
+        { time: "11:00 - 12:00", class: "CML1001", type: "tutorial",room:"LH 604" },
+        { time: "1:00 - 2:00", class: "MTL1002", type: "tutorial",room:"LH 413.2" },
+        { time: "4:00 - 5:30", class: "COL1000", type: "lecture",room:"LH 111,416,418" }
         
       ],
       Friday: [
         { time: "8:00 - 9:00", class: "MEL1002", type: "lecture",room:"LH 602" },
         { time: "9:00 - 1:00", class: "CMP100", type: "lab",room:"LH 103" },
-        { time: "4:00 - 5:30", class: "MTL1002", type: "lecture",room:"LH 510" }
+        { time: "4:00 - 5:00", class: "MTL1002", type: "lecture",room:"LH 510" }
       ]
     }
   };
